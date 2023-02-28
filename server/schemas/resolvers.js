@@ -37,7 +37,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addBook: async (parent, { userId, savedBooks }, context) => {
+        saveBook: async (parent, { userId, savedBooks }, context) => {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: userId },
                 { $addToSet: { savedBooks: savedBooks } },
