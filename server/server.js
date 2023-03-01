@@ -27,7 +27,15 @@ app.get('/', (req, res) => {
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
+  //setup server
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: authMiddleware,
+  });
+
   await server.start();
+    // integrate the Apollo server with the Express application as middleware
   server.applyMiddleware({ app });
   
   db.once('open', () => {
