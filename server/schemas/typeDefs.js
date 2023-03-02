@@ -5,7 +5,7 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    bookCount: String
+    bookCount: Int
     savedBooks: [String]!
   }
   
@@ -17,16 +17,26 @@ const typeDefs = gql`
     image: String
     link: String
   }
+
   type Auth {
     token: ID!
     user: User
   }
 
+  input SavedBookInput {
+    authors: [String]
+    description: String
+    bookId: String
+    image: String
+    link: String
+    title: String
+  }
+
   type Query {
-    users: [user]!
+    users: [User]!
     user(userId: ID!): User
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
-    me: user
+        me: User
   }
 
   type Mutation {
