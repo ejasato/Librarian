@@ -15,7 +15,7 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   //create user mutation
-  const [createUser] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,10 +33,12 @@ const SignupForm = () => {
     }
 
     try {
-      // uses addUser mutation to add a user
-      const { data } = await createUser({
-        variables: { ...userFormData },
+      // uses addUser mutation to add a user  createUser doesnt work I dont know why i followed the path and it doesn't have any syntax errors i can see
+      console.log('here');
+      const { data } = await addUser({
+        variables: { ...userFormData }
       });
+      console.log('here');
       //uses token to login
       Auth.login(data.addUser.token);
     } catch (err) {
